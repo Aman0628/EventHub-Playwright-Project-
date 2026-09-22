@@ -1,0 +1,20 @@
+[{
+    "testcase": "Valid Login",
+    "username": "akori84411@gmail.com",
+    "password": "Bhull@kd12",
+    "shouldLogin" : true
+},
+{
+    "testcase": "Invalid Login - both ",
+    "username": "akori84411@gmail.com",
+    "password": "Bhull@kd1",
+    "shouldLogin" : false,
+    "errorMessage": "Invalid email or password"
+},
+{
+     "testcase": "Invalid Login - only username ",
+    "username": "akor@gmail.com",
+    "password": "Bhull@kd12",
+    "shouldLogin" : false,
+    "errorMessage": "Invalid email or password"
+}]     
