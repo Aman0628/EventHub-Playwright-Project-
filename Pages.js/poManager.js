@@ -1,6 +1,7 @@
 const { loginPage } = require("../Pages.js/loginPage")
 const { dashboardPage } = require("../Pages.js/dashboardPage")
 const { addNewEvent } = require("../Pages.js/addnewEventPage")
+const { confirmBooking } = require("../Pages.js/conifrmBooking")
 
 class POmanager {
 
@@ -9,6 +10,8 @@ class POmanager {
         this.loginpage = new loginPage(page);
         this.dashboardpage = new dashboardPage(page);
         this.addneweventpage = new addNewEvent(page);
+        this.findeventpage = new confirmBooking(page);
+        this.confirmbookingpage = new confirmBooking(page);
     }
 
     getmeLoginpage() {
@@ -20,4 +23,10 @@ class POmanager {
     getmeaddneweventPage() {
         return this.addneweventpage;
     }
-}module.exports = { POmanager };
+    getmeeventPage() {
+        return this.findeventpage;
+    }
+    getmeconfirmbookingPage() {
+        return this.confirmbookingpage;
+    }
+} module.exports = { POmanager };
