@@ -1,5 +1,6 @@
 const { loginPage } = require("../Pages.js/loginPage")
 const { dashboardPage } = require("../Pages.js/dashboardPage")
+const { addNewEvent } = require("../Pages.js/addnewEventPage")
 
 class POmanager {
 
@@ -7,6 +8,7 @@ class POmanager {
         this.page = page;
         this.loginpage = new loginPage(page);
         this.dashboardpage = new dashboardPage(page);
+        this.addneweventpage = new addNewEvent(page);
     }
 
     getmeLoginpage() {
@@ -14,5 +16,8 @@ class POmanager {
     }
     getmedashboardPage() {
         return this.dashboardpage;
+    }
+    getmeaddneweventPage() {
+        return this.addneweventpage;
     }
 }module.exports = { POmanager };
