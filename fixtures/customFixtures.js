@@ -1,10 +1,10 @@
 const base = require("@playwright/test");
-const { POmanager } = require("../../Pages.js/poManager");
-const testData = require("../../Utils.js/testData.json");
+const { POmanager } = require("../Pages.js/poManager");
+const testData = require("../Utils.js/testData.json");
 
 /**
  * ============================================================================
- * STAGE 3: CUSTOM PLAYWRIGHT FIXTURES
+ * CUSTOM PLAYWRIGHT FIXTURES
  * ============================================================================
  * 
  * WHY USE PLAYWRIGHT FIXTURES?

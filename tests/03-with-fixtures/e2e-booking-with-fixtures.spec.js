@@ -1,4 +1,4 @@
-const { test, expect } = require("./customFixtures");
+const { test, expect } = require("../../fixtures/customFixtures");
 
 /**
  * ============================================================================

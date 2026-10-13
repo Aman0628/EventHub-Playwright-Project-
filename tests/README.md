@@ -1,29 +1,42 @@
 # Test Suite Architecture & Progression Guide
 
-This repository demonstrates the evolution of Playwright test architecture across 4 progressive stages:
+This repository demonstrates the evolution of Playwright test architecture across 4 progressive stages with strict separation of test scripts from helpers/fixtures:
 
 ```
-tests/
-├── 01-without-pom/          # 🟢 Stage 1: Raw End-to-End without Page Objects
-│   └── e2e-booking-without-pom.spec.js
+├── Pages.js/                # 📄 Page Object classes & POManager
+│   ├── addnewEventPage.js
+│   ├── confirmBookingPage.js
+│   ├── dashboardPage.js
+│   ├── eventsPage.js
+│   ├── loginPage.js
+│   └── poManager.js
 │
-├── 02-with-pom/             # 🟡 Stage 2: Structured using Page Object Model (POM)
-│   ├── addnewEvent.spec.js
-│   ├── authSecurity.spec.js
-│   ├── booking.spec.js
-│   ├── dashboard.spec.js
-│   ├── eventsSearchFilter.spec.js
-│   └── login.spec.js
+├── fixtures/                # 🧩 Custom Playwright fixtures (reusable test setup)
+│   └── customFixtures.js
 │
-├── 03-with-fixtures/        # 🔵 Stage 3: Modern Playwright with Custom Fixtures
-│   ├── customFixtures.js
-│   └── e2e-booking-with-fixtures.spec.js
+├── Utils.js/                # 🛠️ Shared utilities & test services
+│   ├── apiHelper.js         # REST API client
+│   └── testData.json        # Test data sets
 │
-└── 04-api-testing/          # 🚀 Stage 4: Pure API & Hybrid (API + UI) Testing
-    ├── apiHelper.js
-    ├── events-api.spec.js
-    ├── bookings-api.spec.js
-    └── hybrid-api-ui.spec.js
+└── tests/                   # 🧪 ONLY test specification files (*.spec.js)
+    ├── 01-without-pom/      # 🟢 Stage 1: Raw End-to-End without Page Objects
+    │   └── e2e-booking-without-pom.spec.js
+    │
+    ├── 02-with-pom/         # 🟡 Stage 2: Structured using Page Object Model (POM)
+    │   ├── addnewEvent.spec.js
+    │   ├── authSecurity.spec.js
+    │   ├── booking.spec.js
+    │   ├── dashboard.spec.js
+    │   ├── eventsSearchFilter.spec.js
+    │   └── login.spec.js
+    │
+    ├── 03-with-fixtures/    # 🔵 Stage 3: Modern Playwright with Custom Fixtures
+    │   └── e2e-booking-with-fixtures.spec.js
+    │
+    └── 04-api-testing/      # 🚀 Stage 4: Pure API & Hybrid (API + UI) Testing
+        ├── events-api.spec.js
+        ├── bookings-api.spec.js
+        └── hybrid-api-ui.spec.js
 ```
 
 ---
@@ -41,7 +54,7 @@ tests/
 - **Cons**: Requires repetitive `new POmanager(page)` initialization and boilerplate login in `beforeEach`.
 
 ### 🔵 Stage 3: `03-with-fixtures/` (Playwright Custom Fixtures)
-- **Goal**: Leverage Playwright's built-in dependency injection (`test.extend`) to auto-instantiate page objects and workflows.
+- **Goal**: Leverage Playwright's built-in dependency injection (`fixtures/customFixtures.js`) to auto-instantiate page objects and workflows.
 - **Pros**:
   - Zero `new POmanager(page)` boilerplate.
   - Pre-authenticated session via `authenticatedSession` fixture.
@@ -49,7 +62,7 @@ tests/
   - Test files read like pure declarative business requirements.
 
 ### 🚀 Stage 4: `04-api-testing/` (Pure API & Hybrid API + UI)
-- **Goal**: Test REST API endpoints directly (`request` fixture) and combine API setup with UI validation.
+- **Goal**: Test REST API endpoints directly (`request` fixture) using `Utils.js/apiHelper.js` and combine API setup with UI validation.
 - **Pros**:
   - Lightning fast (~100-300ms execution time).
   - Validates HTTP response codes, headers, and payload schemas.

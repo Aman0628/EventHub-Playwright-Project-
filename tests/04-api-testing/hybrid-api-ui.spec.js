@@ -1,5 +1,5 @@
 const { test, expect } = require("@playwright/test");
-const { ApiHelper } = require("./apiHelper");
+const { ApiHelper } = require("../../Utils.js/apiHelper");
 const { POmanager } = require("../../Pages.js/poManager");
 const testData = require("../../Utils.js/testData.json");
 
