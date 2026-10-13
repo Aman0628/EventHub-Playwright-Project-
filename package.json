@@ -1,0 +1,11 @@
+{
+  "name": "eventhub-playwright-project-root",
+  "version": "1.0.0",
+  "description": "EventHub Playwright automation workspace",
+  "scripts": {
+    "test": "npm test --prefix EventHub-Playwright-Project--main",
+    "test:headed": "npm run test:headed --prefix EventHub-Playwright-Project--main",
+    "test:ui": "npm run test:ui --prefix EventHub-Playwright-Project--main",
+    "test:report": "npm run test:report --prefix EventHub-Playwright-Project--main"
+  }
+}
