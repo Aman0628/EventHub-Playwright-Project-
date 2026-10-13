@@ -1,13 +1,13 @@
 # Test Suite Architecture & Progression Guide
 
-This repository demonstrates the evolution of Playwright test architecture across 3 progressive stages:
+This repository demonstrates the evolution of Playwright test architecture across 4 progressive stages:
 
 ```
 tests/
-├── 01-without-pom/          # Stage 1: Raw End-to-End without Page Objects
+├── 01-without-pom/          # 🟢 Stage 1: Raw End-to-End without Page Objects
 │   └── e2e-booking-without-pom.spec.js
 │
-├── 02-with-pom/             # Stage 2: Structured using Page Object Model (POM)
+├── 02-with-pom/             # 🟡 Stage 2: Structured using Page Object Model (POM)
 │   ├── addnewEvent.spec.js
 │   ├── authSecurity.spec.js
 │   ├── booking.spec.js
@@ -15,9 +15,15 @@ tests/
 │   ├── eventsSearchFilter.spec.js
 │   └── login.spec.js
 │
-└── 03-with-fixtures/        # Stage 3: Modern Playwright with Custom Fixtures
-    ├── customFixtures.js
-    └── e2e-booking-with-fixtures.spec.js
+├── 03-with-fixtures/        # 🔵 Stage 3: Modern Playwright with Custom Fixtures
+│   ├── customFixtures.js
+│   └── e2e-booking-with-fixtures.spec.js
+│
+└── 04-api-testing/          # 🚀 Stage 4: Pure API & Hybrid (API + UI) Testing
+    ├── apiHelper.js
+    ├── events-api.spec.js
+    ├── bookings-api.spec.js
+    └── hybrid-api-ui.spec.js
 ```
 
 ---
@@ -42,6 +48,13 @@ tests/
   - On-demand execution (only requested fixtures run).
   - Test files read like pure declarative business requirements.
 
+### 🚀 Stage 4: `04-api-testing/` (Pure API & Hybrid API + UI)
+- **Goal**: Test REST API endpoints directly (`request` fixture) and combine API setup with UI validation.
+- **Pros**:
+  - Lightning fast (~100-300ms execution time).
+  - Validates HTTP response codes, headers, and payload schemas.
+  - **Hybrid Pattern**: Creates test data via API in milliseconds, then tests UI interactions directly without slow multi-page clicking.
+
 ---
 
 ## Running the Tests
@@ -58,4 +71,7 @@ npx playwright test tests/02-with-pom
 
 # Run only Stage 3 (with Fixtures)
 npx playwright test tests/03-with-fixtures
+
+# Run only Stage 4 (API & Hybrid Tests)
+npx playwright test tests/04-api-testing
 ```
