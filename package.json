@@ -1,11 +1,20 @@
 {
-  "name": "eventhub-playwright-project-root",
+  "name": "eventhub-playwright-project",
   "version": "1.0.0",
   "description": "EventHub Playwright automation workspace",
+  "main": "index.js",
   "scripts": {
-    "test": "npm test --prefix EventHub-Playwright-Project--main",
-    "test:headed": "npm run test:headed --prefix EventHub-Playwright-Project--main",
-    "test:ui": "npm run test:ui --prefix EventHub-Playwright-Project--main",
-    "test:report": "npm run test:report --prefix EventHub-Playwright-Project--main"
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:ui": "playwright test --ui",
+    "test:report": "playwright show-report"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@playwright/test": "^1.63.0",
+    "@types/node": "^26.6.1"
   }
 }

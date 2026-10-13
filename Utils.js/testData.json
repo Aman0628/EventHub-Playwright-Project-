@@ -1,0 +1,43 @@
+[
+  {
+    "testcase": "Valid Login",
+    "username": "akori84411@gmail.com",
+    "password": "Bhull@kd12",
+    "shouldLogin": true
+  },
+  {
+    "testcase": "Valid Login - Secondary User (Template)",
+    "username": "dummy_user2@example.com",
+    "password": "DummyPassword123!",
+    "shouldLogin": true,
+    "skip": true
+  },
+  {
+    "testcase": "Invalid Login - only password",
+    "username": "akori84411@gmail.com",
+    "password": "Bhull@kd1",
+    "shouldLogin": false,
+    "errorMessage": "Invalid email or password"
+  },
+  {
+    "testcase": "Invalid Login - only username",
+    "username": "akor@gmail.com",
+    "password": "Bhull@kd12",
+    "shouldLogin": false,
+    "errorMessage": "Invalid email or password"
+  },
+  {
+    "testcase": "Invalid Login - both username and password",
+    "username": "dummy_invalid@example.com",
+    "password": "WrongPassword123!",
+    "shouldLogin": false,
+    "errorMessage": "Invalid email or password"
+  },
+  {
+    "testcase": "Invalid Login - unregistered user",
+    "username": "dummy_unregistered@example.com",
+    "password": "SamplePassword123!",
+    "shouldLogin": false,
+    "errorMessage": "Invalid email or password"
+  }
+]
