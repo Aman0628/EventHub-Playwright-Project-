@@ -1,6 +1,6 @@
 const { test } = require("@playwright/test");
-const testData = require("../Utils.js/testData.json");
-const { POmanager } = require("../Pages.js/poManager");
+const testData = require("../../Utils.js/testData.json");
+const { POmanager } = require("../../Pages.js/poManager");
 
 for (const data of testData) {
 

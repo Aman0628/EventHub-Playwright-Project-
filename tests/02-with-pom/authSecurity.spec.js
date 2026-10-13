@@ -1,5 +1,5 @@
 const { test, expect } = require("@playwright/test");
-const { POmanager } = require("../Pages.js/poManager");
+const { POmanager } = require("../../Pages.js/poManager");
 
 test.describe("Authentication Security & Validation Suite", () => {
     test("should ensure password field is masked with type='password'", async ({ page }) => {

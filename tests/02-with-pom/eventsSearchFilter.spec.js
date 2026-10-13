@@ -1,6 +1,6 @@
 const { test, expect } = require("@playwright/test");
-const { POmanager } = require("../Pages.js/poManager");
-const testData = require("../Utils.js/testData.json");
+const { POmanager } = require("../../Pages.js/poManager");
+const testData = require("../../Utils.js/testData.json");
 
 test.describe("Events Search & Filter Tests", () => {
     test.beforeEach(async ({ page }) => {

@@ -1,6 +1,6 @@
 const { test, expect } = require("@playwright/test");
-const { POmanager } = require("../Pages.js/poManager");
-const testData = require("../Utils.js/testData.json");
+const { POmanager } = require("../../Pages.js/poManager");
+const testData = require("../../Utils.js/testData.json");
 
 test.beforeEach(async ({ page }) => {
     const poManager = new POmanager(page);
