@@ -31,9 +31,9 @@ test.describe("Logout & Session Management Suite", () => {
     // ─── Test 1: Standard Logout ───────────────────────────────────────────────
     test("should redirect to login page after clicking logout", async ({ page }) => {
         const poManager = await loginAsValidUser(page);
-        const dashboardPage = poManager.getmedashboardPage();
+        const navbar = poManager.getmeNavbarComponent();
 
-        await dashboardPage.logout();
+        await navbar.logout();
 
         // Confirm user lands on the login page
         await expect(page).toHaveURL(/.*login/);
@@ -42,10 +42,10 @@ test.describe("Logout & Session Management Suite", () => {
     // ─── Test 2: Session Invalidation ─────────────────────────────────────────
     test("should invalidate session — protected route /bookings redirects to login after logout", async ({ page }) => {
         const poManager = await loginAsValidUser(page);
-        const dashboardPage = poManager.getmedashboardPage();
+        const navbar = poManager.getmeNavbarComponent();
 
         // Logout first
-        await dashboardPage.logout();
+        await navbar.logout();
         await expect(page).toHaveURL(/.*login/);
 
         // Attempt to navigate directly to a protected route
@@ -58,9 +58,9 @@ test.describe("Logout & Session Management Suite", () => {
     // ─── Test 3: Session Invalidation — Events Route ──────────────────────────
     test("should invalidate session — protected route /events redirects to login after logout", async ({ page }) => {
         const poManager = await loginAsValidUser(page);
-        const dashboardPage = poManager.getmedashboardPage();
+        const navbar = poManager.getmeNavbarComponent();
 
-        await dashboardPage.logout();
+        await navbar.logout();
         await expect(page).toHaveURL(/.*login/);
 
         await page.goto("https://eventhub.rahulshettyacademy.com/events");
@@ -70,13 +70,13 @@ test.describe("Logout & Session Management Suite", () => {
     // ─── Test 4: Browser Back Button After Logout ─────────────────────────────
     test("should not restore authenticated session when pressing the back button after logout", async ({ page }) => {
         const poManager = await loginAsValidUser(page);
-        const dashboardPage = poManager.getmedashboardPage();
+        const navbar = poManager.getmeNavbarComponent();
 
-        // Go to events page to have a page to navigate back to
-        await dashboardPage.verifyeventButton();
+        // Navigate to events page using navbar
+        await navbar.navigateToEvents();
 
         // Logout from the events page
-        await dashboardPage.logout();
+        await navbar.logout();
         await expect(page).toHaveURL(/.*login/);
 
         // Simulate browser back button
@@ -89,10 +89,10 @@ test.describe("Logout & Session Management Suite", () => {
     // ─── Test 5: Re-login After Logout ────────────────────────────────────────
     test("should allow user to re-login successfully after logging out", async ({ page }) => {
         const poManager = await loginAsValidUser(page);
-        const dashboardPage = poManager.getmedashboardPage();
+        const navbar = poManager.getmeNavbarComponent();
 
         // First logout
-        await dashboardPage.logout();
+        await navbar.logout();
         await expect(page).toHaveURL(/.*login/);
 
         // Re-login with valid credentials
@@ -109,11 +109,10 @@ test.describe("Logout & Session Management Suite", () => {
     // ─── Test 6: Logout Button Visibility ─────────────────────────────────────
     test("should display a visible and enabled logout button on the dashboard", async ({ page }) => {
         const poManager = await loginAsValidUser(page);
-        const dashboardPage = poManager.getmedashboardPage();
+        const navbar = poManager.getmeNavbarComponent();
 
-        // Assert the logout button is rendered and clickable
-        await expect(dashboardPage.logoutButton).toBeVisible();
-        await expect(dashboardPage.logoutButton).toBeEnabled();
+        // Assert the logout button is rendered and clickable via navbar component
+        await navbar.verifyLogoutButtonVisible();
     });
 
     // ─── Test 7: Multi-Tab Logout (Same Browser Context) ──────────────────────
@@ -137,9 +136,9 @@ test.describe("Logout & Session Management Suite", () => {
         // Tab 2 should be authenticated since it shares the context
         await expect(tab2).toHaveURL("https://eventhub.rahulshettyacademy.com/events");
 
-        // Logout from Tab 1
-        const dashboardPageTab1 = poManagerTab1.getmedashboardPage();
-        await dashboardPageTab1.logout();
+        // Logout from Tab 1 using navbarComponent
+        const navbarTab1 = poManagerTab1.getmeNavbarComponent();
+        await navbarTab1.logout();
         await expect(tab1).toHaveURL(/.*login/);
 
         // On Tab 2, refreshing should now reflect the invalidated session

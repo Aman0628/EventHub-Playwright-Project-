@@ -3,6 +3,7 @@ const { dashboardPage } = require("./dashboardPage");
 const { addNewEvent } = require("./addnewEventPage");
 const { confirmBooking } = require("./confirmBookingPage");
 const { eventsPage } = require("./eventsPage");
+const { navbarComponent } = require("./navbarComponent");
 
 class POmanager {
 
@@ -13,6 +14,7 @@ class POmanager {
         this.addneweventpage = new addNewEvent(page);
         this.findeventpage = new eventsPage(page);
         this.confirmbookingpage = new confirmBooking(page);
+        this.navbarcomponent = new navbarComponent(page);
     }
 
     getmeLoginpage() {
@@ -29,6 +31,9 @@ class POmanager {
     }
     getmeconfirmbookingPage() {
         return this.confirmbookingpage;
+    }
+    getmeNavbarComponent() {
+        return this.navbarcomponent;
     }
 }
 
